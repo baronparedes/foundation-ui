@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI'
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.brand {
+  font-family: 'Fredoka One', cursive;
+}
+
+.fa-spin {
+  animation: fa-spin 2s infinite linear;
+}
+
+.text-underline {
+  text-decoration-line: underline;
+}
+
+.currency:before {
+	content: "Php ";
+}
+
+.print-body {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  padding: 3em;
+}
+
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}

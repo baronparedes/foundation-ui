@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {useDispatch} from 'react-redux';
+import {RestfulProvider} from 'restful-react';
 
-function App() {
+import config from './config';
+import {useRootState} from './store';
+import {profileActions} from './store/reducers/profile.reducer';
+
+const App: React.FC = props => {
+  const dispatch = useDispatch();
+  const {token} = useRootState(state => state.profile);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RestfulProvider
+      base={config.API_URI}
+      onRequest={req => {
+        if (token) {
+          req.headers.append('Authorization', `Bearer ${token}`);
+        }
+      }}
+      onError={err => {
+        // Unauthorized
+        if (err.status === 401) {
+          dispatch(profileActions.signOut());
+        }
+      }}
+    >
+      <div id="content">
+        {props.children}
+        <span className="p-3" />
+      </div>
+    </RestfulProvider>
   );
-}
+};
 
 export default App;

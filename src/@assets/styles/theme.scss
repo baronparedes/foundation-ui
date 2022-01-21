@@ -1,0 +1,100 @@
+$navbar-dark-toggler-border-color: #ffffff;
+
+$primary: #175795;
+$secondary: #4284C2;
+$info: #A2BBD4;
+$light: #FFFFFF;
+$dark: #03284A;
+
+$theme-colors: ("primary": $primary,
+    "secondary": $secondary,
+    "dark": $dark);
+
+$body-bg: #E9EBEE;
+
+:root {
+    --primary: $primary;
+    --secondary: $secondary;
+    --info: $info;
+    --light: $light;
+    --dark: $dark;
+    --nav-shadow:#283655;
+    --nav-bg:#0d3459;
+}
+
+.btn {
+    text-transform: lowercase;
+}
+
+.navbar-nav {
+    .nav-item.active.dropdown {
+        .dropdown-toggle:first-child {
+            border-bottom: 3px solid $info;
+        }
+    }
+
+    .nav-link {
+        background-color: none;
+        color: $light !important;
+        margin: 0.5em;
+    
+        &.active {
+            border-bottom: 3px solid $info;
+        }
+    
+        &:hover {
+            background: none;
+            background-image: none;
+            color: $info !important;
+        }
+    }
+}
+
+.nav-tabs {
+    .nav-link {
+        margin: 0.5em;
+        font-weight: bold;
+    
+        &.active {
+            background-color: white !important;
+        }
+    
+        &:hover {
+            background: none;
+            background-image: none;
+            color: $primary !important;
+        }
+    }
+}
+
+.thead-primary {
+    background-color: $primary;
+    color: $light;
+
+    th {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+
+.form-label {
+    text-transform: lowercase;
+}
+
+
+/* Removes white spaces margin from modal header */
+.modal-content {
+    margin: -2px !important;
+}
+
+.modal-header {
+    background-color: $dark;
+    color: $light;
+
+    button.close {
+        color: $light
+    }
+
+}
+
+@import "node_modules/bootstrap/scss/bootstrap";
