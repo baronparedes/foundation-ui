@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {Profile} from '../../@types';
+import {AuthProfile} from '../../Api';
 import {AppThunk} from '../../store';
 import localStore from '../local';
 
 export type ProfileState = {
-  me?: Profile;
+  me?: AuthProfile;
   token?: string;
 };
 
@@ -42,8 +42,16 @@ export const profileSlice = createSlice({
       state.me = undefined;
       state.token = undefined;
     },
-    updateCurrentProfile: (state, action: PayloadAction<Profile>) => {
-      state.me = action.payload;
+    updateCurrentProfile: (
+      state,
+      action: PayloadAction<UpdateCurrentProfilePayload>
+    ) => {
+      if (state.me) {
+        state.me.email = action.payload.email;
+        state.me.name = action.payload.name;
+        state.me.mobileNumber = action.payload.mobileNumber;
+        state.me.remarks = action.payload.remarks;
+      }
     },
   },
 });

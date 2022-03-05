@@ -3,20 +3,25 @@ import {Button, Navbar} from 'react-bootstrap';
 import {useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-import {Profile} from '../../@types';
 import routes from '../../@utils/routes';
 import {useRootState} from '../../store';
-import {profileActions} from '../../store/reducers/profile.reducer';
+import {
+  profileActions,
+  ProfileState,
+} from '../../store/reducers/profile.reducer';
 import Avatar from './Avatar';
 import ModalContainer from './ModalContainer';
 
-const AvatarProfile: React.FC<{profile: Profile}> = ({profile}) => {
+const AvatarProfile: React.FC<{profile: ProfileState}> = ({profile}) => {
   const [toggle, setToggle] = useState(false);
   return (
     <>
       {profile && (
         <>
-          <Avatar onClick={() => setToggle(true)} name={profile.name} />
+          <Avatar
+            onClick={() => setToggle(true)}
+            name={profile.me?.name || 'profile'}
+          />
           <ModalContainer
             header={<h5>Update your profile</h5>}
             toggle={toggle}
@@ -44,7 +49,7 @@ const NavCurrentProfile = () => {
       {profile && profile.me && (
         <>
           <Navbar.Text className="mr-2">
-            <AvatarProfile profile={profile.me} />
+            <AvatarProfile profile={profile} />
           </Navbar.Text>
           <Navbar.Text>
             <Button variant="secondary" onClick={handleOnClick} size="sm">

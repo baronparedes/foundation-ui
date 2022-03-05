@@ -4,8 +4,8 @@ import {FaEnvelope, FaKey, FaMobile, FaTag, FaUserAlt} from 'react-icons/fa';
 import {useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-import {Profile, RegisterProfile} from '../../@types';
 import routes from '../../@utils/routes';
+import {RegisterProfile, useRegister} from '../../Api';
 import {useRootState} from '../../store';
 import {profileActions} from '../../store/reducers/profile.reducer';
 import ButtonLoading from '../@ui/ButtonLoading';
@@ -13,15 +13,6 @@ import ErrorInfo from '../@ui/ErrorInfo';
 import {getFieldErrorsFromRequest} from '../@validation';
 
 type FormData = RegisterProfile & {confirmPassword: string};
-
-const data = {
-  profile: {
-    name: 'Baron Paredes',
-    username: 'baronp',
-    type: 'admin',
-  },
-  token: 'some_token',
-};
 
 const RegisterForm = () => {
   const initialValue: FormData = {
@@ -34,9 +25,7 @@ const RegisterForm = () => {
   };
   const dispatch = useDispatch();
   const {token} = useRootState(state => state.profile);
-  // const {loading, error, mutate} = useRegister({});
-  const loading = false;
-  const error = null;
+  const {loading, error, mutate} = useRegister({});
   const {handleSubmit, control, getValues, formState, reset} =
     useForm<FormData>({defaultValues: initialValue});
   const onSubmit = (formData: FormData) => {
@@ -47,19 +36,18 @@ const RegisterForm = () => {
       username: formData.username,
       password: formData.password,
     };
-    console.log(body);
-    // mutate(body)
-    //   .then(data => {
-    //     if (data) {
-    dispatch(
-      profileActions.signIn({
-        me: data.profile as Profile,
-        token: data.token,
+    mutate(body)
+      .then(data => {
+        if (data) {
+          dispatch(
+            profileActions.signIn({
+              me: data.profile,
+              token: data.token,
+            })
+          );
+        }
       })
-    );
-    //     }
-    //   })
-    //   .catch(() => {});
+      .catch(() => {});
   };
   const onReset = () => {
     reset(initialValue);

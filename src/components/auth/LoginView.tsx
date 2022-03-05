@@ -2,7 +2,6 @@ import {useState} from 'react';
 import {Button, Col, Container} from 'react-bootstrap';
 import styled from 'styled-components';
 
-import {DEFAULTS} from '../../constants';
 import RoundedPanel from '../@ui/RoundedPanel';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import LoginForm from './LoginForm';
@@ -21,7 +20,7 @@ const LoginView = () => {
   return (
     <Container fluid>
       <LoginContainer className="pt-5 pb-5">
-        <h1 className="brand text-center">{DEFAULTS.BRAND}</h1>
+        <h1 className="brand text-center">foundation</h1>
         {formType === 'login' && (
           <>
             <LoginForm />

@@ -4,8 +4,8 @@ import {RiCommunityLine} from 'react-icons/ri';
 import {LinkContainer} from 'react-router-bootstrap';
 import {NavLink} from 'react-router-dom';
 
-import {ProfileType} from '../../@types';
 import routes from '../../@utils/routes';
+import {ProfileType} from '../../Api';
 import {DEFAULTS} from '../../constants';
 import {useRootState} from '../../store';
 import NavCurrentProfile from './NavCurrentProfile';

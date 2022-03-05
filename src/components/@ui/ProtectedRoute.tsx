@@ -1,8 +1,8 @@
 import React from 'react';
 import {Redirect, Route, RouteProps} from 'react-router-dom';
 
-import {ProfileType} from '../../@types';
 import routes from '../../@utils/routes';
+import {ProfileType} from '../../Api';
 import {useRootState} from '../../store';
 
 type Props = {

@@ -4,8 +4,8 @@ import {FaKey, FaUserAlt} from 'react-icons/fa';
 import {useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-import {Profile} from '../../@types';
 import routes from '../../@utils/routes';
+import {useAuth} from '../../Api';
 import {useRootState} from '../../store';
 import {profileActions} from '../../store/reducers/profile.reducer';
 import ButtonLoading from '../@ui/ButtonLoading';
@@ -16,21 +16,10 @@ type FormData = {
   password: string;
 };
 
-const data = {
-  profile: {
-    name: 'Baron Paredes',
-    username: 'baronp',
-    type: 'admin',
-  },
-  token: 'some_token',
-};
-
 const LoginForm = () => {
   const dispatch = useDispatch();
   const {token} = useRootState(state => state.profile);
-  const loading = false;
-  const error = null;
-  // const {mutate, loading, error} = useAuth({});
+  const {mutate, loading, error} = useAuth({});
   const {handleSubmit, control} = useForm<FormData>({
     defaultValues: {
       password: '',
@@ -38,21 +27,20 @@ const LoginForm = () => {
     },
   });
   const onSubmit = (formData: FormData) => {
-    console.log(formData);
-    // const bearer = `${formData.username}:${formData.password}`;
-    // const credentials = Buffer.from(bearer).toString('base64');
-    // mutate(undefined, {headers: {Authorization: `Basic ${credentials}`}})
-    //   .then(data => {
-    //     if (data) {
-    dispatch(
-      profileActions.signIn({
-        me: data.profile as Profile,
-        token: data.token,
+    const bearer = `${formData.username}:${formData.password}`;
+    const credentials = Buffer.from(bearer).toString('base64');
+    mutate(undefined, {headers: {Authorization: `Basic ${credentials}`}})
+      .then(data => {
+        if (data) {
+          dispatch(
+            profileActions.signIn({
+              me: data.profile,
+              token: data.token,
+            })
+          );
+        }
       })
-    );
-    //     }
-    //   })
-    //   .catch(() => {});
+      .catch(() => {});
   };
   if (token) {
     return <Redirect to={routes.ROOT} />;

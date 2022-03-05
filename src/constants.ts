@@ -1,4 +1,5 @@
-import {Month, Period, ProfileType, RecordStatus} from './@types';
+import {Month, Period} from './@types';
+import {ProfileType, RecordStatus} from './Api';
 
 export const STATUS_COLORS = {
   active: 'text-success',
