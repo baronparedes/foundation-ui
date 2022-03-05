@@ -13,11 +13,7 @@ export function generateFakeProfile(type?: ProfileType): AuthProfile {
     remarks: faker.random.words(),
     type:
       type ??
-      faker.random.arrayElement<ProfileType>([
-        'unit owner',
-        'stakeholder',
-        'admin',
-      ]),
+      faker.random.arrayElement<ProfileType>(['user', 'stakeholder', 'admin']),
   };
 }
 
