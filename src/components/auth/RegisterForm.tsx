@@ -5,12 +5,12 @@ import {useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
 import routes from '../../@utils/routes';
+import {getFieldErrorsFromRequest} from '../../@validation';
 import {RegisterProfile, useRegister} from '../../Api';
 import {useRootState} from '../../store';
 import {profileActions} from '../../store/reducers/profile.reducer';
 import ButtonLoading from '../@ui/ButtonLoading';
 import ErrorInfo from '../@ui/ErrorInfo';
-import {getFieldErrorsFromRequest} from '../@validation';
 
 type FormData = RegisterProfile & {confirmPassword: string};
 

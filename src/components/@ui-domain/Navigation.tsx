@@ -29,15 +29,6 @@ function buildNavigationSections(profileType: ProfileType) {
     to: 'divider',
   };
 
-  if (['admin', 'stakeholder'].includes(profileType)) {
-    sections.push({
-      id: 'dashboard-nav-section',
-      title: 'dashboard',
-      to: routes.DASHBOARD,
-      exact: true,
-    });
-  }
-
   if (['admin'].includes(profileType)) {
     sections.push({
       id: 'admin-nav-section',
@@ -60,7 +51,7 @@ function buildNavigationSections(profileType: ProfileType) {
           title: (
             <>
               <RiCommunityLine className="mr-1" />
-              properties
+              projects
             </>
           ),
         },

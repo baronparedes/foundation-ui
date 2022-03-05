@@ -1,7 +1,7 @@
 import {Validate, ValidationRule} from 'react-hook-form';
 import {GetDataError} from 'restful-react';
 
-import {ApprovedAny} from '../../@types';
+import {ApprovedAny} from '../@types';
 
 export function getFieldErrorsFromRequest(
   e: GetDataError<ApprovedAny> | null,

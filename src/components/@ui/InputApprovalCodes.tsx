@@ -7,7 +7,7 @@ import {
   validateNotEmpty,
   validateNoTrailingSpaces,
   validateUnique,
-} from '../@validation';
+} from '../../@validation';
 
 type Props = {
   codes: string[];

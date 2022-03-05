@@ -9,8 +9,8 @@ import {
   profileActions,
   ProfileState,
 } from '../../store/reducers/profile.reducer';
-import Avatar from './Avatar';
-import ModalContainer from './ModalContainer';
+import Avatar from '../@ui/Avatar';
+import ModalContainer from '../@ui/ModalContainer';
 
 const AvatarProfile: React.FC<{profile: ProfileState}> = ({profile}) => {
   const [toggle, setToggle] = useState(false);
