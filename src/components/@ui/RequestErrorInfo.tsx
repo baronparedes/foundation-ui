@@ -10,12 +10,12 @@ export const RequestErrorInfo = ({error}: Props) => {
     return <ErrorInfo>{error}</ErrorInfo>;
   }
 
-  if (error.fieldErrors) {
+  if (error.data?.fieldErrors) {
     return (
       <ErrorInfo>
         <ul>
-          {error.fieldErrors.map((fe: {er: ApprovedAny}) => {
-            return <li>{fe.er}</li>;
+          {error.data.fieldErrors.map((fe: ApprovedAny) => {
+            return <li>{fe.message}</li>;
           })}
         </ul>
       </ErrorInfo>

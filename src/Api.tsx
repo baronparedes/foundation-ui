@@ -64,6 +64,16 @@ export interface UpdateProfile {
   name: string;
 }
 
+export interface ProjectAttr {
+  id?: number;
+  name: string;
+  code: string;
+  location: string;
+  estimatedCost: number;
+  remarks?: string;
+  status: RecordStatus;
+}
+
 export type AuthProps = Omit<MutateProps<AuthResult, unknown, void, void, void>, "path" | "verb">;
 
 export const Auth = (props: AuthProps) => (
@@ -218,4 +228,59 @@ export const ResetPassword = (props: ResetPasswordProps) => (
 export type UseResetPasswordProps = Omit<UseMutateProps<void, unknown, void, ResetPasswordRequestBody, void>, "path" | "verb">;
 
 export const useResetPassword = (props: UseResetPasswordProps) => useMutate<void, unknown, void, ResetPasswordRequestBody, void>("POST", `/api/profile/resetPassword`, props);
+
+
+export interface GetAllProjectsQueryParams {
+  search?: string;
+}
+
+export type GetAllProjectsProps = Omit<GetProps<ProjectAttr[], unknown, GetAllProjectsQueryParams, void>, "path">;
+
+export const GetAllProjects = (props: GetAllProjectsProps) => (
+  <Get<ProjectAttr[], unknown, GetAllProjectsQueryParams, void>
+    path={`/api/project/getAll`}
+    
+    {...props}
+  />
+);
+
+export type UseGetAllProjectsProps = Omit<UseGetProps<ProjectAttr[], unknown, GetAllProjectsQueryParams, void>, "path">;
+
+export const useGetAllProjects = (props: UseGetAllProjectsProps) => useGet<ProjectAttr[], unknown, GetAllProjectsQueryParams, void>(`/api/project/getAll`, props);
+
+
+export type CreateProjectProps = Omit<MutateProps<ProjectAttr, EntityError, void, ProjectAttr, void>, "path" | "verb">;
+
+export const CreateProject = (props: CreateProjectProps) => (
+  <Mutate<ProjectAttr, EntityError, void, ProjectAttr, void>
+    verb="POST"
+    path={`/api/project/createProject`}
+    
+    {...props}
+  />
+);
+
+export type UseCreateProjectProps = Omit<UseMutateProps<ProjectAttr, EntityError, void, ProjectAttr, void>, "path" | "verb">;
+
+export const useCreateProject = (props: UseCreateProjectProps) => useMutate<ProjectAttr, EntityError, void, ProjectAttr, void>("POST", `/api/project/createProject`, props);
+
+
+export interface UpdateProjectPathParams {
+  id: number
+}
+
+export type UpdateProjectProps = Omit<MutateProps<ProjectAttr, EntityError | ApiError, void, ProjectAttr, UpdateProjectPathParams>, "path" | "verb"> & UpdateProjectPathParams;
+
+export const UpdateProject = ({id, ...props}: UpdateProjectProps) => (
+  <Mutate<ProjectAttr, EntityError | ApiError, void, ProjectAttr, UpdateProjectPathParams>
+    verb="PATCH"
+    path={`/api/project/updateProject/${id}`}
+    
+    {...props}
+  />
+);
+
+export type UseUpdateProjectProps = Omit<UseMutateProps<ProjectAttr, EntityError | ApiError, void, ProjectAttr, UpdateProjectPathParams>, "path" | "verb"> & UpdateProjectPathParams;
+
+export const useUpdateProject = ({id, ...props}: UseUpdateProjectProps) => useMutate<ProjectAttr, EntityError | ApiError, void, ProjectAttr, UpdateProjectPathParams>("PATCH", (paramsInPath: UpdateProjectPathParams) => `/api/project/updateProject/${paramsInPath.id}`, {  pathParams: { id }, ...props });
 
