@@ -8,6 +8,7 @@ import NotFound from './components/@ui/NotFound';
 import ProfilesView from './components/admin/manage-profiles/ProfilesView';
 import ProjectsView from './components/admin/manage-projects/ProjectsView';
 import LoginView from './components/auth/LoginView';
+import PortfolioView from './components/portfolio/PortfolioView';
 import {useRootState} from './store';
 
 const AppRouter: React.FC = () => {
@@ -24,6 +25,12 @@ const AppRouter: React.FC = () => {
         </HeaderPanel>
         <div className="m-2">
           <Switch>
+            <ProtectedRoute
+              path={routes.ROOT}
+              exact
+              onlyFor={['admin', 'user']}
+              component={PortfolioView}
+            />
             <ProtectedRoute
               path={routes.ADMIN_PROFILES}
               exact
